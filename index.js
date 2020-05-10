@@ -1,13 +1,13 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Vuex from 'vuex';
+// import VueRouter from 'vue-router';
+// import Vuex from 'vuex';
 
-Vue.use(VueRouter)
-Vue.use(Vuex)
+// Vue.use(VueRouter)
+// Vue.use(Vuex)
 
 import defaultView from './defaultView.vue'
 
-export function generateRouter(context, intercept) {
+export function generateRoutes(context, intercept) {
   // validate
   if (!context) throw "this is no context";
 
@@ -36,10 +36,11 @@ export function generateRouter(context, intercept) {
     routes = intercept(routes)
   }
   console.log(routes)
-  return new VueRouter({
-    mode: "history",
-    routes,
-  });
+  // return new VueRouter({
+  //   mode: "history",
+  //   routes,
+  // });
+  return routes
 }
 
 function addRoute(routes, path, view) {
@@ -117,21 +118,22 @@ export function generateStore(context, intercept) {
     store = intercept(store)
   }
   console.log(store)
-  return new Vuex.Store(store);
+  // return new Vuex.Store(store);
+  return store
 }
 
-const VueAutoGenerator = {
-  App: defaultView
-};
-VueAutoGenerator.install = function (Vue, options) {
+// const VueAutoGenerator = {
+//   App: defaultView
+// };
+// VueAutoGenerator.install = function (Vue, options) {
   
-  const router = generateRouter(options.routerContext, options.routerIntercept)
-  const store = generateStore(options.storeContext, options.storeIntercept)
-  Vue.mixin({
-    router,
-    store,
-    render: function (h) { return h(defaultView) },
-  })
-}
+//   const router = generateRouter(options.routerContext, options.routerIntercept)
+//   const store = generateStore(options.storeContext, options.storeIntercept)
+//   Vue.mixin({
+//     router,
+//     store,
+//     render: function (h) { return h(defaultView) },
+//   })
+// }
 
-export default VueAutoGenerator
+// export default VueAutoGenerator
